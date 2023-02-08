@@ -2,6 +2,9 @@ import React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const AddTaskForm = (props) => {
 
@@ -13,6 +16,7 @@ const AddTaskForm = (props) => {
       }}
       onSubmit={props.submit}
     >
+    
       <div>
         <TextField
           required
@@ -26,13 +30,33 @@ const AddTaskForm = (props) => {
       <div>
         <TextField
           required
-          name="deadline"
-          label="Deadline"
+          name=""
+          label=""
           InputLabelProps={{ shrink: true }}
           type="date"
           onChange={(event) => props.change(event)}
         />
       </div>
+      <div>
+      <FormControl fullWidth>
+     
+      <Select
+       required
+       id="outlined-required"
+          name="prior"
+          
+          onChange={(event) => props.change(event)}
+          
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={4}>Low</MenuItem>
+          <MenuItem value={5}>Medium</MenuItem>
+          <MenuItem value={6}>High</MenuItem>
+        </Select>
+        </FormControl>
+    </div>
       <div>
         <TextField
           name="description"

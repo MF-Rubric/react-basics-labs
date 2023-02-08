@@ -7,24 +7,28 @@ import Task from './components/Task';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 
 function App() {
   const [ taskState, setTaskState ] = useState({
     tasks: [
-      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false },
-      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false },
-      { id: 3, title: "Tidy up", deadline: "Today", done: false}
+      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false, prior:"Low"},
+      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false, prior:"Medium" },
+      { id: 3, title: "Tidy up",  deadline: "Today", done: false, prior:"High"}
     ]
   });
   
   const [ formState, setFormState ] = useState({
     title: "",
     description: "",
-    deadline: ""
+    deadline: "",
+    prior:"",
   }); 
+
+  
+
   const doneHandler = (taskIndex) => {
     const tasks = [...taskState.tasks];
     tasks[taskIndex].done = !tasks[taskIndex].done;
@@ -46,11 +50,15 @@ function App() {
       case "description":
           form.description = event.target.value;
           break;
+      
       case "deadline":
           form.deadline = event.target.value;
           break;
       default:
           form = formState;
+          case "prior:":
+        form.prior = event.target.value;
+        break;
     }  
     setFormState(form);
   }
@@ -97,6 +105,7 @@ function App() {
                 title={task.title}
                 description={task.description}
                 deadline={task.deadline}
+                prior={task.prior}
                 done={task.done}
                 key={task.id}
                 markDone = {() => doneHandler(index)}
